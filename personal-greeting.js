@@ -5,7 +5,7 @@
 
   // Mirror foto Azfar & Azraf secara horizontal.
   const photoStyle = document.createElement('style');
-  photoStyle.textContent = `.photo img{transform:scaleX(-1)}`;
+  photoStyle.textContent = `.photo img{transform:scaleX(-1)}.gallery figure:first-child{aspect-ratio:4/5}.gallery figure:first-child img{object-position:center center}`;
   document.head.appendChild(photoStyle);
 
   const guest = new URLSearchParams(window.location.search).get('to');
