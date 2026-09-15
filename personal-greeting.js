@@ -1,4 +1,8 @@
 (() => {
+  // Hero sudah menampilkan tanggal di bagian lain undangan.
+  // Hapus tanggal/jam dari hero agar halaman pembuka lebih bersih.
+  document.querySelectorAll('.hero .hero-copy')[1]?.remove();
+
   const guest = new URLSearchParams(window.location.search).get('to');
   if (!guest || !guest.trim()) return;
 
