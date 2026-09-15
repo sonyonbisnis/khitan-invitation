@@ -46,5 +46,6 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targe
 const bgMusic=$('bgMusic'),musicBtn=$('musicBtn');bgMusic.volume=.42;let playing=false;function setMusicState(on){playing=on;musicBtn.textContent=on?'❚❚':'♪';musicBtn.setAttribute('aria-label',on?'Matikan musik':'Putar musik');musicBtn.title=on?'Matikan musik':'Putar musik'}
 $('openInvite').addEventListener('click',e=>{e.preventDefault();document.querySelector('#undangan').scrollIntoView({behavior:'smooth'});bgMusic.play().then(()=>setMusicState(true)).catch(()=>setMusicState(false))});musicBtn.addEventListener('click',()=>{if(bgMusic.paused){bgMusic.play().then(()=>setMusicState(true)).catch(()=>setMusicState(false))}else{bgMusic.pause();setMusicState(false)}});
 </script>
+  <script src="personal-greeting.js"></script>
 </body>
 </html>
