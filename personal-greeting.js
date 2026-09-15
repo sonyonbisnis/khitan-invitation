@@ -1,11 +1,10 @@
 (() => {
-  // Hero sudah menampilkan tanggal di bagian lain undangan.
-  // Hapus tanggal/jam dari hero agar halaman pembuka lebih bersih.
+  // Hero: hapus tanggal/jam dari pembuka agar lebih bersih.
   document.querySelectorAll('.hero .hero-copy')[1]?.remove();
 
   // Mirror foto Azfar & Azraf secara horizontal.
   const photoStyle = document.createElement('style');
-  photoStyle.textContent = `.photo img{transform:scaleX(-1)}.gallery figure:first-child{aspect-ratio:4/5}.gallery figure:first-child img{object-position:center center}`;
+  photoStyle.textContent = `.photo img{transform:scaleX(-1)}.gallery figure:first-child{aspect-ratio:4/5}.gallery figure:first-child img{transform:scale(1.18);transform-origin:center center}`;
   document.head.appendChild(photoStyle);
 
   const guest = new URLSearchParams(window.location.search).get('to');
