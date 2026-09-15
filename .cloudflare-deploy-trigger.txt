@@ -1,0 +1,2 @@
+Cloudflare Pages deployment trigger — 2026-09-15
+This file is intentionally harmless and does not affect the website.
