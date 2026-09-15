@@ -3,6 +3,11 @@
   // Hapus tanggal/jam dari hero agar halaman pembuka lebih bersih.
   document.querySelectorAll('.hero .hero-copy')[1]?.remove();
 
+  // Mirror foto Azfar & Azraf secara horizontal.
+  const photoStyle = document.createElement('style');
+  photoStyle.textContent = `.photo img{transform:scaleX(-1)}`;
+  document.head.appendChild(photoStyle);
+
   const guest = new URLSearchParams(window.location.search).get('to');
   if (!guest || !guest.trim()) return;
 
