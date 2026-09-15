@@ -7,6 +7,19 @@
   photoStyle.textContent = `.photo img{transform:scaleX(-1)}.gallery figure:first-child{aspect-ratio:4/5}.gallery figure:first-child img{transform:scale(1.18);transform-origin:center center}`;
   document.head.appendChild(photoStyle);
 
+  // Siapkan backsound sejak halaman dibuka agar klik "Buka Undangan" terasa lebih instan.
+  const bgMusic = document.getElementById('bgMusic');
+  if (bgMusic) {
+    bgMusic.preload = 'auto';
+    bgMusic.load();
+    const preload = document.createElement('link');
+    preload.rel = 'preload';
+    preload.as = 'audio';
+    preload.href = bgMusic.currentSrc || bgMusic.src;
+    preload.type = 'audio/mpeg';
+    document.head.appendChild(preload);
+  }
+
   const guest = new URLSearchParams(window.location.search).get('to');
   if (!guest || !guest.trim()) return;
 
