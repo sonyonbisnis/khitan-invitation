@@ -20,6 +20,27 @@
     document.head.appendChild(preload);
   }
 
+  // Rapikan tanggal dan tambahkan tombol simpan ke Google Calendar.
+  const dateMain = document.querySelector('.date-main');
+  if (dateMain) {
+    dateMain.textContent = 'Minggu, 01 November 2026';
+    const calendarStyle = document.createElement('style');
+    calendarStyle.textContent = `.date-main{white-space:nowrap;font-size:24px;letter-spacing:-.01em}.calendar-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:11px 20px;border:1px solid #c9aa48;border-radius:999px;background:#fff;color:#7b5e12;text-decoration:none;font-size:11px;font-weight:800;box-shadow:0 7px 18px rgba(6,22,45,.06);transition:.2s}.calendar-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(6,22,45,.09)}@media(max-width:360px){.date-main{font-size:22px}}`;
+    document.head.appendChild(calendarStyle);
+    const calendarTarget = document.querySelector('.countdown') || dateMain;
+    if (!document.getElementById('saveCalendar')) {
+      const calendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tasyakuran%20Khitan%20Azfar%20%26%20Azraf&dates=20261101T050000Z%2F20261101T080000Z&details=Semoga%20kehadiran%20Bapak%2FIbu%20menjadi%20kebahagiaan%20bagi%20Azfar%20%26%20Azraf.&location=Goeboek%20Bamboe%2C%20Jl.%20Pramuka%20Raya%20No.12A%2C%20Mampang%2C%20Pancoran%20Mas%2C%20Depok%2C%20Jawa%20Barat';
+      const calendarBtn = document.createElement('a');
+      calendarBtn.id = 'saveCalendar';
+      calendarBtn.className = 'calendar-btn';
+      calendarBtn.href = calendarUrl;
+      calendarBtn.target = '_blank';
+      calendarBtn.rel = 'noopener';
+      calendarBtn.innerHTML = '📅 Simpan ke Kalender';
+      calendarTarget.insertAdjacentElement('afterend', calendarBtn);
+    }
+  }
+
   // Tanda kasih: bahasa lembut dan seluruh pilihan bersifat opsional.
   const rsvp = document.querySelector('.rsvp');
   if (rsvp && !document.getElementById('tandaKasih')) {
