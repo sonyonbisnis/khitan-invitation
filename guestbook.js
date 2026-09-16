@@ -2,6 +2,12 @@
   const rsvp = document.querySelector('.rsvp');
   if (!rsvp || document.getElementById('guestbook')) return;
 
+  const section = rsvp.closest('.section');
+  const heading = section?.querySelector('h2');
+  if (heading && heading.textContent.trim().toUpperCase() === 'RSVP') {
+    heading.textContent = 'Kehadiran & Ucapan';
+  }
+
   const textarea = rsvp.querySelector('#rsvpMsg, textarea');
   const nameInput = rsvp.querySelector('#rsvpName, input');
   const attendance = rsvp.querySelector('#rsvpAttend, select');
@@ -55,7 +61,7 @@
   wrap.id = 'guestbook';
   wrap.className = 'guestbook-wrap';
   wrap.innerHTML = `<div class="guestbook-title">📖 Ucapan & Do'a</div><div class="guestbook-list" id="guestbookList"><div class="guestbook-empty">Memuat ucapan...</div></div><div class="guestbook-status" id="guestbookStatus"></div>`;
-  rsvp.closest('.section')?.appendChild(wrap);
+  section?.appendChild(wrap);
 
   const list = wrap.querySelector('#guestbookList');
   const status = wrap.querySelector('#guestbookStatus');
