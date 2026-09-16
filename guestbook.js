@@ -37,6 +37,7 @@
     .guestbook-page-info{width:100%;text-align:center;color:#9aa5b2;font-size:9px;margin-top:2px}
     .rsvp-success{display:none;margin-top:14px;padding:14px 15px;border-radius:16px;background:#fbf8ef;border:1px solid rgba(212,175,55,.35);color:var(--navy);font-size:12px;text-align:center;line-height:1.6}
     .rsvp-success.show{display:block}
+    .rsvp textarea{resize:none!important;min-height:100px!important;height:100px!important;max-height:100px!important;overflow-y:auto}
     #tandaKasih{margin:18px 0 16px!important;padding:0!important;background:transparent!important}
     #tandaKasih .gift-card{margin:14px 0 0!important;padding:0!important;border:0!important;box-shadow:none!important}
     #tandaKasih .gift-intro{display:none}
