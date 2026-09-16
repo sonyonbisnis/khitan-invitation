@@ -1,0 +1,1 @@
+Trigger Cloudflare Pages redeploy for fixed RSVP flow. The RSVP button must no longer open WhatsApp.
