@@ -11,8 +11,8 @@
 
   const textareaField = textarea.closest('.field');
   const label = textareaField?.querySelector('label');
-  if (label) label.textContent = 'Ucapan & Doa';
-  textarea.placeholder = 'Tuliskan ucapan dan doa untuk Azfar & Azraf...';
+  if (label) label.textContent = "Ucapan & Do'a";
+  textarea.placeholder = "Tuliskan ucapan dan do'a untuk Azfar & Azraf...";
 
   const style = document.createElement('style');
   style.textContent = `
@@ -35,28 +35,26 @@
   `;
   document.head.appendChild(style);
 
-  // Tanda Kasih menjadi bagian dari alur RSVP, tepat setelah Ucapan & Doa dan sebelum tombol Kirim.
   const giftSection = document.getElementById('tandaKasih');
   const giftSelect = document.getElementById('giftType');
   if (giftSection) rsvp.insertBefore(giftSection, oldButton);
 
-  // Ganti tombol lama agar listener WhatsApp dari halaman lama tidak ikut terbawa.
   const submitButton = oldButton.cloneNode(true);
   submitButton.id = 'sendRsvp';
-  submitButton.innerHTML = 'Kirim RSVP & Ucapan 🤍';
+  submitButton.innerHTML = "Kirim Kehadiran & Ucapan 🤍";
   submitButton.type = 'button';
   submitButton.classList.add('guestbook-save');
   oldButton.replaceWith(submitButton);
 
   const success = document.createElement('div');
   success.className = 'rsvp-success';
-  success.innerHTML = 'Terima kasih. RSVP dan ucapan Anda telah tersimpan. 🤍<br><small>Semoga doa baiknya menjadi kebahagiaan untuk Azfar & Azraf.</small>';
+  success.innerHTML = "Terima kasih. Konfirmasi kehadiran dan ucapan Anda telah tersimpan. 🤍<br><small>Semoga do'a baiknya menjadi kebahagiaan untuk Azfar & Azraf.</small>";
   submitButton.insertAdjacentElement('afterend', success);
 
   const wrap = document.createElement('div');
   wrap.id = 'guestbook';
   wrap.className = 'guestbook-wrap';
-  wrap.innerHTML = `<div class="guestbook-title">📖 Ucapan & Doa</div><div class="guestbook-list" id="guestbookList"><div class="guestbook-empty">Memuat ucapan...</div></div><div class="guestbook-status" id="guestbookStatus"></div>`;
+  wrap.innerHTML = `<div class="guestbook-title">📖 Ucapan & Do'a</div><div class="guestbook-list" id="guestbookList"><div class="guestbook-empty">Memuat ucapan...</div></div><div class="guestbook-status" id="guestbookStatus"></div>`;
   rsvp.closest('.section')?.appendChild(wrap);
 
   const list = wrap.querySelector('#guestbookList');
@@ -68,7 +66,7 @@
 
   function render(entries) {
     if (!entries.length) {
-      list.innerHTML = '<div class="guestbook-empty">Belum ada ucapan. Jadilah yang pertama mengirim doa. 🤍</div>';
+      list.innerHTML = "<div class='guestbook-empty'>Belum ada ucapan. Jadilah yang pertama mengirim do'a. 🤍</div>";
       return;
     }
     list.innerHTML = entries.map(entry => {
@@ -82,12 +80,12 @@
     try {
       const response = await fetch('/api/guestbook', {cache:'no-store'});
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Buku doa belum tersedia.');
+      if (!response.ok) throw new Error(data.error || "Buku do'a belum tersedia.");
       render(Array.isArray(data.entries) ? data.entries : []);
       status.textContent = '';
       status.classList.remove('error');
     } catch (error) {
-      list.innerHTML = '<div class="guestbook-empty">Buku doa sedang disiapkan.</div>';
+      list.innerHTML = "<div class='guestbook-empty'>Buku do'a sedang disiapkan.</div>";
       status.textContent = error.message || '';
       status.classList.add('error');
     }
@@ -132,7 +130,7 @@
       return;
     }
     if (!message || message.length < 3) {
-      status.textContent = 'Ucapan & Doa wajib diisi.';
+      status.textContent = "Ucapan & Do'a wajib diisi.";
       status.classList.add('error');
       textarea.focus();
       return;
@@ -146,7 +144,7 @@
 
     saving = true;
     submitButton.disabled = true;
-    status.textContent = 'Menyimpan RSVP...';
+    status.textContent = 'Menyimpan data...';
 
     try {
       const response = await fetch('/api/guestbook', {
@@ -155,10 +153,10 @@
         body:JSON.stringify({name, attendance:attend, guest_count:count, message, gift_type:gift})
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'RSVP belum dapat disimpan.');
+      if (!response.ok) throw new Error(data.error || 'Data belum dapat disimpan.');
 
       success.classList.add('show');
-      status.textContent = 'Tersimpan di buku tamu. 🤍';
+      status.textContent = 'Tersimpan. 🤍';
       rsvp.querySelectorAll('input, textarea').forEach(el => { if (el !== nameInput) el.value = ''; });
       nameInput.value = '';
       guestCount.value = '1';
@@ -168,7 +166,7 @@
       document.getElementById('physicalGift')?.classList.remove('show');
       await loadEntries();
     } catch (error) {
-      status.textContent = error.message || 'RSVP belum dapat disimpan.';
+      status.textContent = error.message || 'Data belum dapat disimpan.';
       status.classList.add('error');
     } finally {
       saving = false;
@@ -176,6 +174,6 @@
     }
   });
 
-  if (giftSelect) giftSelect.setAttribute('aria-label', 'Bentuk Tanda Kasih, opsional');
+  if (giftSelect) giftSelect.setAttribute('aria-label', "Bentuk Tanda Kasih, opsional");
   loadEntries();
 })();
