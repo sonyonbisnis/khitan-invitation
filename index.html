@@ -7,6 +7,11 @@
 <meta name="description" content="Undangan digital tasyakuran khitan Azfar & Azraf">
 <meta property="og:title" content="Tasyakuran Khitan — Azfar & Azraf">
 <meta property="og:description" content="Sebuah hari istimewa, sebuah doa besar.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://duoaz.my.id/">
+<meta property="og:image" content="https://duoaz.my.id/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <title>Tasyakuran Khitan — Azfar & Azraf</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
@@ -41,11 +46,17 @@ footer{background:#031022;color:#aebbc9;text-align:center;padding:55px 25px 70px
 <button class="music" id="musicBtn" aria-label="Putar musik">♪</button>
 <script>
 const CONFIG={eventDate:'2026-11-01T12:00:00+07:00',whatsapp:'6281299388287',maps:'https://share.google/ufqhLld2NbcA118h2'};const $=id=>document.getElementById(id);function tick(){const d=new Date(CONFIG.eventDate)-new Date();const v=d>0?d:0;$("days").textContent=String(Math.floor(v/86400000)).padStart(2,'0');$("hours").textContent=String(Math.floor(v/3600000)%24).padStart(2,'0');$("mins").textContent=String(Math.floor(v/60000)%60).padStart(2,'0');$("secs").textContent=String(Math.floor(v/1000)%60).padStart(2,'0')}tick();setInterval(tick,1000);$('mapLink').href=CONFIG.maps;
-$('sendRsvp').addEventListener('click',()=>{const name=$('rsvpName').value.trim()||'-';const attend=$('rsvpAttend').value;const count=$('rsvpCount').value;const msg=$('rsvpMsg').value.trim()||'-';const text=`Assalamu’alaikum.\n\nRSVP Tasyakuran Khitan Azfar & Azraf\nNama: ${name}\nKehadiran: ${attend}\nJumlah tamu: ${count}\nUcapan/Doa: ${msg}`;window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`,'_blank')});
+$('sendRsvp').addEventListener('click',()=>{const name=$('rsvpName').value.trim()||'-';const attend=$('rsvpAttend').value;const count=$('rsvpCount').value;const msg=$('rsvpMsg').value.trim()||'-';const text=`Assalamu’alaikum.\
+\
+RSVP Tasyakuran Khitan Azfar & Azraf\
+Nama: ${name}\
+Kehadiran: ${attend}\
+Jumlah tamu: ${count}\
+Ucapan/Doa: ${msg}`;window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`,'_blank')});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 const bgMusic=$('bgMusic'),musicBtn=$('musicBtn');bgMusic.volume=.42;let playing=false;function setMusicState(on){playing=on;musicBtn.textContent=on?'❚❚':'♪';musicBtn.setAttribute('aria-label',on?'Matikan musik':'Putar musik');musicBtn.title=on?'Matikan musik':'Putar musik'}
 $('openInvite').addEventListener('click',e=>{e.preventDefault();document.querySelector('#undangan').scrollIntoView({behavior:'smooth'});bgMusic.play().then(()=>setMusicState(true)).catch(()=>setMusicState(false))});musicBtn.addEventListener('click',()=>{if(bgMusic.paused){bgMusic.play().then(()=>setMusicState(true)).catch(()=>setMusicState(false))}else{bgMusic.pause();setMusicState(false)}});
 </script>
-  <script src="personal-greeting.js"></script>
+<script src="personal-greeting.js"></script>
 </body>
 </html>
