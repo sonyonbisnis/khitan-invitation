@@ -49,13 +49,13 @@
     section.className = 'section cream center reveal';
     section.innerHTML = `
       <div class="kicker">🤍 Tanda Kasih</div>
-      <p class="gift-intro">Doa dan kehadiran Bapak/Ibu merupakan kebahagiaan yang sangat berarti bagi kami.<br>Apabila berkenan memberikan tanda kasih untuk Azfar &amp; Azraf, kami menyediakan beberapa pilihan berikut.</p>
+      <p class="gift-intro">Do'a dan kehadiran Bapak/Ibu merupakan kebahagiaan yang sangat berarti bagi kami.<br>Apabila berkenan memberikan tanda kasih untuk Azfar &amp; Azraf, kami menyediakan beberapa pilihan berikut.</p>
       <div class="gift-card">
         <div class="field gift-field">
           <label for="giftType">Bentuk Tanda Kasih</label>
           <select id="giftType">
             <option value="">Silakan pilih (opsional)</option>
-            <option value="presence">🤲 Doa &amp; Kehadiran</option>
+            <option value="presence">🤲 Do'a &amp; Kehadiran</option>
             <option value="physical">🎁 Hadiah</option>
             <option value="digital">💳 Tanda Kasih Digital</option>
           </select>
@@ -67,7 +67,7 @@
         <div id="physicalGift" class="gift-detail">
           <div class="gift-account"><b>🎁 Alamat Pengiriman Hadiah</b><b style="margin-top:8px">Penerima:</b><span>Sony Afrizal / Sahlatul Rizqiyyah R.</span><b style="margin-top:8px">Alamat:</b><span>Perumahan Green Athaya No. A1, Jl. Moh. Mirkam RT 6 RW 1, Kel. Rangkapan Jaya, Kec. Pancoran Mas, Depok, Jawa Barat 16435</span><button type="button" class="copy-btn" data-copy="Sony Afrizal / Sahlatul Rizqiyyah R., Perumahan Green Athaya No. A1, Jl. Moh. Mirkam RT 6 RW 1, Kel. Rangkapan Jaya, Kec. Pancoran Mas, Depok, Jawa Barat 16435">Salin Alamat</button></div>
         </div>
-        <p class="gift-note">Namun demikian, tidak ada kewajiban dalam bentuk apa pun. Doa, perhatian, dan kehadiran Bapak/Ibu sudah menjadi hadiah yang sangat berharga bagi kami. 🤍</p>
+        <p class="gift-note">Namun demikian, tidak ada kewajiban dalam bentuk apa pun. Do'a, perhatian, dan kehadiran Bapak/Ibu sudah menjadi hadiah yang sangat berharga bagi kami. 🤍</p>
       </div>`;
 
     const style = document.createElement('style');
