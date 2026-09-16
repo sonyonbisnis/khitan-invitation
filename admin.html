@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin RSVP — Azfar & Azraf</title>
 <style>
-:root{--navy:#06162d;--gold:#d4af37;--paper:#f3f1eb;--muted:#718096;--line:#e4e7eb}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#17283d;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1050px;margin:auto;padding:28px 18px 50px}header{background:linear-gradient(145deg,#0d2c51,#041326);color:#fff;border-radius:24px;padding:25px;margin-bottom:18px}h1{margin:0 0 5px;font-family:Georgia,serif;font-weight:600}header p{margin:0;color:#cbd6e2;font-size:13px}.login,.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 12px 35px rgba(6,22,45,.06)}.login{max-width:520px;margin:35px auto}.field{display:grid;gap:7px;margin-bottom:13px}label{font-size:12px;font-weight:800}input{width:100%;padding:12px 13px;border:1px solid #d8dee5;border-radius:12px;font:inherit}button{border:0;border-radius:12px;padding:12px 16px;background:var(--gold);color:#07162b;font-weight:800;cursor:pointer}button.secondary{background:var(--navy);color:#fff}.msg{font-size:12px;color:#b42318;margin-top:10px;min-height:18px}.hidden{display:none}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px}.stat b{display:block;font-size:28px;color:var(--navy)}.stat span{font-size:11px;color:var(--muted)}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.toolbar h2{margin:0;font-family:Georgia,serif}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:11px 9px;border-bottom:1px solid #edf0f2;text-align:left;font-size:12px;vertical-align:top}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:30px}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.toolbar{align-items:flex-start;flex-direction:column}.toolbar button{width:100%}}
+:root{--navy:#06162d;--gold:#d4af37;--paper:#f3f1eb;--muted:#718096;--line:#e4e7eb;--danger:#a61b1b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#17283d;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:28px 18px 50px}header{background:linear-gradient(145deg,#0d2c51,#041326);color:#fff;border-radius:24px;padding:25px;margin-bottom:18px}h1{margin:0 0 5px;font-family:Georgia,serif;font-weight:600}header p{margin:0;color:#cbd6e2;font-size:13px}.login,.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 12px 35px rgba(6,22,45,.06)}.login{max-width:520px;margin:35px auto}.field{display:grid;gap:7px;margin-bottom:13px}label{font-size:12px;font-weight:800}input{width:100%;padding:12px 13px;border:1px solid #d8dee5;border-radius:12px;font:inherit}button{border:0;border-radius:12px;padding:12px 16px;background:var(--gold);color:#07162b;font-weight:800;cursor:pointer}button.secondary{background:var(--navy);color:#fff}button.danger{background:#fff0f0;color:var(--danger);border:1px solid #e7b5b5}.msg{font-size:12px;color:#b42318;margin-top:10px;min-height:18px}.hidden{display:none}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px}.stat b{display:block;font-size:28px;color:var(--navy)}.stat span{font-size:11px;color:var(--muted)}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.toolbar h2{margin:0;font-family:Georgia,serif}.actions{display:flex;gap:8px;flex-wrap:wrap}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:820px}.table th,.table td{padding:11px 9px;border-bottom:1px solid #edf0f2;text-align:left;font-size:12px;vertical-align:top}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.check{width:18px;height:18px}.empty{text-align:center;color:var(--muted);padding:30px}.hint{font-size:11px;color:var(--muted);margin:8px 0 0}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.toolbar{align-items:flex-start;flex-direction:column}.actions{width:100%;display:grid;grid-template-columns:1fr}.actions button{width:100%}}
 </style>
 </head>
 <body>
@@ -14,13 +14,12 @@
 <section id="login" class="login"><div class="field"><label>Admin Token</label><input id="token" type="password" autocomplete="current-password" placeholder="Masukkan token admin"></div><button id="loginBtn">Masuk</button><div id="loginMsg" class="msg"></div></section>
 <section id="dashboard" class="hidden">
 <div class="stats"><div class="stat"><b id="hadir">0</b><span>Hadir (RSVP)</span></div><div class="stat"><b id="tidakHadir">0</b><span>Tidak Hadir</span></div><div class="stat"><b id="totalTamu">0</b><span>Total Tamu</span></div><div class="stat"><b id="totalRsvp">0</b><span>Total RSVP</span></div></div>
-<div class="panel"><div class="toolbar"><h2>Daftar Tamu</h2><button id="xlsxBtn" class="secondary">Download XLSX</button></div><div class="table-wrap"><table class="table"><thead><tr><th>Nama</th><th>Kehadiran</th><th>Tamu</th><th>Ucapan &amp; Do'a</th><th>Tanda Kasih</th><th>Waktu</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<div class="panel"><div class="toolbar"><h2>Daftar Tamu</h2><div class="actions"><button id="xlsxBtn" class="secondary">Download XLSX</button><button id="resetSelectedBtn" class="danger">Reset yang Dipilih</button><button id="resetAllBtn" class="danger">Reset All</button></div></div><p class="hint">Centang data yang ingin dihapus. Reset All akan menghapus seluruh data RSVP dan ucapan.</p><div class="table-wrap"><table class="table"><thead><tr><th><input id="selectAll" class="check" type="checkbox" title="Pilih semua"></th><th>Nama</th><th>Kehadiran</th><th>Tamu</th><th>Ucapan &amp; Do'a</th><th>Tanda Kasih</th><th>Waktu</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 </section>
 </div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script>
-let token='';let entries=[];
-const $=id=>document.getElementById(id);
+let token='';let entries=[];const $=id=>document.getElementById(id);
 $('loginBtn').onclick=async()=>{token=$('token').value.trim();if(!token){$('loginMsg').textContent='Token wajib diisi.';return}await load()};
 $('token').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
 async function load(){
@@ -30,19 +29,20 @@ async function load(){
   }catch(e){$('loginMsg').textContent=e.message}
 }
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function render(){$('rows').innerHTML=entries.length?entries.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.attendance)}</td><td>${esc(x.guest_count)}</td><td>${esc(x.message)}</td><td>${esc(x.gift_type||'—')}</td><td>${esc(x.created_at)}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Belum ada data.</td></tr>'}
-$('xlsxBtn').onclick=()=>{
-  if(!entries.length){alert('Belum ada data RSVP untuk diunduh.');return}
-  const rows=[
-    ['Nama','Kehadiran','Jumlah Tamu',"Ucapan & Do'a",'Tanda Kasih','Waktu'],
-    ...entries.map(x=>[x.name,x.attendance,Number(x.guest_count||0),x.message,x.gift_type||'',x.created_at])
-  ];
-  const ws=XLSX.utils.aoa_to_sheet(rows);
-  ws['!cols']=[{wch:28},{wch:16},{wch:14},{wch:55},{wch:24},{wch:22}];
-  const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,'RSVP');
-  XLSX.writeFile(wb,'rsvp-azfar-azraf.xlsx');
-};
+function render(){$('rows').innerHTML=entries.length?entries.map(x=>`<tr><td><input class="row-check check" type="checkbox" value="${esc(x.id)}"></td><td>${esc(x.name)}</td><td>${esc(x.attendance)}</td><td>${esc(x.guest_count)}</td><td>${esc(x.message)}</td><td>${esc(x.gift_type||'—')}</td><td>${esc(x.created_at)}</td></tr>`).join(''):'<tr><td colspan="7" class="empty">Belum ada data.</td></tr>';syncSelectAll()}
+function selectedIds(){return [...document.querySelectorAll('.row-check:checked')].map(x=>Number(x.value)).filter(Number.isInteger)}
+function syncSelectAll(){const boxes=[...document.querySelectorAll('.row-check')];$('selectAll').checked=boxes.length>0&&boxes.every(x=>x.checked);$('selectAll').indeterminate=boxes.some(x=>x.checked)&&!$('selectAll').checked}
+$('selectAll').onchange=()=>{document.querySelectorAll('.row-check').forEach(x=>x.checked=$('selectAll').checked);syncSelectAll()};
+document.addEventListener('change',e=>{if(e.target.classList.contains('row-check'))syncSelectAll()});
+async function reset(action,ids=[]){
+  const phrase=action==='reset_all'?'RESET ALL':'RESET';
+  const text=action==='reset_all'?'SEMUA data RSVP dan ucapan akan dihapus permanen. Ketik RESET ALL untuk melanjutkan.':'Data yang dipilih akan dihapus permanen. Ketik RESET untuk melanjutkan.';
+  const confirmText=prompt('⚠️ '+text);if(confirmText!==phrase)return;
+  try{const r=await fetch('/api/admin',{method:'POST',headers:{'content-type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify({action,ids})});const data=await r.json();if(!r.ok)throw new Error(data.error||'Reset gagal');await load();alert(`Berhasil menghapus ${action==='reset_all'?'seluruh data':data.deleted+' data terpilih'}.`)}catch(e){alert(e.message)}
+}
+$('resetAllBtn').onclick=()=>reset('reset_all');
+$('resetSelectedBtn').onclick=()=>{const ids=selectedIds();if(!ids.length){alert('Pilih minimal satu data terlebih dahulu.');return}reset('reset_selected',ids)};
+$('xlsxBtn').onclick=()=>{if(!entries.length){alert('Belum ada data RSVP untuk diunduh.');return}const rows=[['Nama','Kehadiran','Jumlah Tamu',"Ucapan & Do'a",'Tanda Kasih','Waktu'],...entries.map(x=>[x.name,x.attendance,Number(x.guest_count||0),x.message,x.gift_type||'',x.created_at])];const ws=XLSX.utils.aoa_to_sheet(rows);ws['!cols']=[{wch:28},{wch:16},{wch:14},{wch:55},{wch:24},{wch:22}];const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'RSVP');XLSX.writeFile(wb,'rsvp-azfar-azraf.xlsx')};
 </script>
 </body>
 </html>
