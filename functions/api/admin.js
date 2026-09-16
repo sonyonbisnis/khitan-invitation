@@ -1,10 +1,6 @@
 export async function onRequestGet({ request, env }) {
-  const token = String(env.ADMIN_TOKEN || '');
-  const auth = request.headers.get('authorization') || '';
-
-  if (!token || auth !== `Bearer ${token}`) {
-    return json({ error: 'Akses admin tidak diizinkan.' }, 401);
-  }
+  const auth = checkAuth(request, env);
+  if (auth) return auth;
   if (!env.DB) return json({ error: 'Database RSVP belum terhubung.' }, 503);
 
   const url = new URL(request.url);
@@ -35,6 +31,48 @@ export async function onRequestGet({ request, env }) {
     },
     entries: results
   });
+}
+
+export async function onRequestPost({ request, env }) {
+  const auth = checkAuth(request, env);
+  if (auth) return auth;
+  if (!env.DB) return json({ error: 'Database RSVP belum terhubung.' }, 503);
+
+  let body;
+  try {
+    body = await request.json();
+  } catch (_) {
+    return json({ error: 'Data reset tidak valid.' }, 400);
+  }
+
+  const action = String(body?.action || '').trim();
+  if (action === 'reset_all') {
+    await env.DB.prepare('DELETE FROM guestbook').run();
+    return json({ ok: true, deleted: 'all' });
+  }
+
+  if (action === 'reset_selected') {
+    const ids = Array.isArray(body?.ids)
+      ? body.ids.map(Number).filter(Number.isInteger).filter(id => id > 0)
+      : [];
+    const uniqueIds = [...new Set(ids)].slice(0, 100);
+    if (!uniqueIds.length) return json({ error: 'Pilih minimal satu data.' }, 400);
+
+    const placeholders = uniqueIds.map(() => '?').join(',');
+    const result = await env.DB.prepare(`DELETE FROM guestbook WHERE id IN (${placeholders})`).bind(...uniqueIds).run();
+    return json({ ok: true, deleted: Number(result?.meta?.changes || 0) });
+  }
+
+  return json({ error: 'Aksi tidak dikenal.' }, 400);
+}
+
+function checkAuth(request, env) {
+  const token = String(env.ADMIN_TOKEN || '');
+  const auth = request.headers.get('authorization') || '';
+  if (!token || auth !== `Bearer ${token}`) {
+    return json({ error: 'Akses admin tidak diizinkan.' }, 401);
+  }
+  return null;
 }
 
 function json(data, status = 200) {
