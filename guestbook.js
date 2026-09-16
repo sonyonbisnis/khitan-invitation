@@ -18,7 +18,6 @@
   style.textContent = `
     .guestbook-wrap{margin:28px 0 0;padding:18px;border:1px solid rgba(212,175,55,.25);border-radius:20px;background:#fff}
     .guestbook-title{font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:600;color:var(--navy);margin-bottom:4px}
-    .guestbook-sub{font-size:11px;color:var(--muted);line-height:1.6}
     .guestbook-list{display:grid;gap:9px;margin-top:14px;max-height:310px;overflow:auto}
     .guestbook-entry{padding:13px 14px;border:1px solid #e8e4da;border-radius:15px;background:#fbfaf6}
     .guestbook-entry b{display:block;color:var(--navy);font-size:12px}
@@ -36,13 +35,12 @@
   `;
   document.head.appendChild(style);
 
-  // personal-greeting.js membuat Tanda Kasih sebagai section terpisah. Pindahkan ke dalam kartu RSVP,
-  // tepat setelah Ucapan & Doa dan sebelum tombol Kirim.
+  // Tanda Kasih menjadi bagian dari alur RSVP, tepat setelah Ucapan & Doa dan sebelum tombol Kirim.
   const giftSection = document.getElementById('tandaKasih');
   const giftSelect = document.getElementById('giftType');
   if (giftSection) rsvp.insertBefore(giftSection, oldButton);
 
-  // Tombol lama memiliki listener WhatsApp dari index.html. Clone untuk menghapus listener tersebut.
+  // Ganti tombol lama agar listener WhatsApp dari halaman lama tidak ikut terbawa.
   const submitButton = oldButton.cloneNode(true);
   submitButton.id = 'sendRsvp';
   submitButton.innerHTML = 'Kirim RSVP & Ucapan 🤍';
@@ -58,7 +56,7 @@
   const wrap = document.createElement('div');
   wrap.id = 'guestbook';
   wrap.className = 'guestbook-wrap';
-  wrap.innerHTML = `<div class="guestbook-title">📖 Ucapan & Doa</div><div class="guestbook-sub">Ucapan yang disetujui akan tersimpan menjadi buku doa digital dan dapat dibaca oleh tamu lainnya.</div><div class="guestbook-list" id="guestbookList"><div class="guestbook-empty">Memuat ucapan...</div></div><div class="guestbook-status" id="guestbookStatus"></div>`;
+  wrap.innerHTML = `<div class="guestbook-title">📖 Ucapan & Doa</div><div class="guestbook-list" id="guestbookList"><div class="guestbook-empty">Memuat ucapan...</div></div><div class="guestbook-status" id="guestbookStatus"></div>`;
   rsvp.closest('.section')?.appendChild(wrap);
 
   const list = wrap.querySelector('#guestbookList');
