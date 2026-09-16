@@ -8,7 +8,7 @@
   polishStyle.textContent = `
     .section h2{letter-spacing:-.015em}
     .intro-text,.detail small,.event p,.mapbox p{font-size:13px;line-height:1.65}
-    .mapbox p .venue-name{display:block;font-size:18px;line-height:1.35;color:#fff;margin-bottom:3px;font-weight:700}
+    .mapbox p .venue-name{display:block;font-size:18px;line-height:1.2;color:#fff;margin-bottom:-4px;font-weight:700}
     .hero h1{font-size:clamp(58px,15vw,88px)}
     .hero h1 small{font-size:18px;letter-spacing:.18em;margin-bottom:13px}
     .hero-name{font-size:42px;line-height:1.05}
@@ -23,17 +23,21 @@
     .field input,.field select,.field textarea{font-size:13px;line-height:1.5;padding:12px 14px;border-radius:15px}
     .field textarea{min-height:100px;line-height:1.55}
     .rsvp .btn{margin-top:7px;min-height:50px}
+    .location-tight{padding-top:38px!important}
+    .rsvp-tight{padding-bottom:38px!important}
     @media(max-width:420px){
       .gift-card{padding:19px 17px 16px;border-radius:22px}
       .gift-field select{min-height:54px}
       .rsvp{padding:19px 17px;border-radius:23px}
       .field{margin-bottom:14px}
       .intro-text,.detail small,.event p,.mapbox p{font-size:12px}
-      .mapbox p .venue-name{font-size:17px;margin-bottom:3px}
+      .mapbox p .venue-name{font-size:17px;margin-bottom:-4px}
       .hero h1{font-size:56px}
       .hero h1 small{font-size:17px}
       .hero-name{font-size:40px}
       .gift-note{font-size:13px}
+      .location-tight{padding-top:34px!important}
+      .rsvp-tight{padding-bottom:34px!important}
     }
   `;
   document.head.appendChild(polishStyle);
@@ -41,6 +45,12 @@
   const mapP=document.querySelector('.mapbox p');
   if(mapP && !mapP.querySelector('.venue-name')){
     mapP.innerHTML=mapP.innerHTML.replace('Goeboek Bamboe','<strong class="venue-name">Goeboek Bamboe</strong>');
+  }
+  const mapBox=document.querySelector('.mapbox');
+  const mapSection=mapBox?.closest('.section');
+  if(mapSection){
+    mapSection.classList.add('location-tight');
+    mapSection.previousElementSibling?.classList.add('rsvp-tight');
   }
 
   const bgMusic = document.getElementById('bgMusic');
