@@ -28,7 +28,7 @@
     section.className = 'section cream center reveal';
     section.innerHTML = `
       <div class="kicker">🤍 Tanda Kasih</div>
-      <p class="gift-intro">Doa dan kehadiran Bapak/Ibu merupakan kebahagiaan yang sangat berarti bagi kami.<br>Apabila berkenan memberikan tanda kasih untuk Azfar &amp; Azraf, dapat disampaikan melalui pilihan berikut.</p>
+      <p class="gift-intro">Doa dan kehadiran Bapak/Ibu merupakan kebahagiaan yang sangat berarti bagi kami.<br>Apabila berkenan memberikan tanda kasih untuk Azfar &amp; Azraf, kami menyediakan beberapa pilihan berikut.</p>
       <div class="gift-card">
         <div class="field gift-field">
           <label for="giftType">Bentuk Tanda Kasih</label>
@@ -36,7 +36,7 @@
             <option value="">Silakan pilih (opsional)</option>
             <option value="presence">🤲 Doa &amp; Kehadiran</option>
             <option value="physical">🎁 Hadiah</option>
-            <option value="digital">💳 Tanda kasih secara digital</option>
+            <option value="digital">💳 Tanda Kasih Digital</option>
           </select>
         </div>
         <div id="digitalGift" class="gift-detail">
