@@ -35,7 +35,21 @@
       <div id="physicalGift" class="gift-detail"><div class="gift-account"><b>🎁 Alamat Pengiriman Hadiah</b><b style="margin-top:8px">Penerima:</b><span>Sony Afrizal / Sahlatul Rizqiyyah R.</span><b style="margin-top:8px">Alamat:</b><span>Perumahan Green Athaya No. A1, Jl. Moh. Mirkam RT 6 RW 1, Kel. Rangkapan Jaya, Kec. Pancoran Mas, Depok, Jawa Barat 16435</span><button type="button" class="copy-btn" data-copy="Sony Afrizal / Sahlatul Rizqiyyah R., Perumahan Green Athaya No. A1, Jl. Moh. Mirkam RT 6 RW 1, Kel. Rangkapan Jaya, Kec. Pancoran Mas, Depok, Jawa Barat 16435">Salin Alamat</button></div></div>
       <p class="gift-note">Do'a, perhatian, dan kehadiran Bapak/Ibu sudah menjadi hadiah yang sangat berharga bagi kami.</p></div>`;
     const style=document.createElement('style');
-    style.textContent=`.gift-intro{max-width:560px;margin:0 auto;color:var(--muted);font-size:13px;line-height:1.8}.gift-card{max-width:590px;margin:28px auto 0;padding:23px;border:1px solid rgba(212,175,55,.32);border-radius:27px;background:#fff;box-shadow:var(--shadow);text-align:left}.gift-field{margin-bottom:16px}.gift-detail{display:none;gap:10px}.gift-detail.show{display:grid}.gift-account{padding:16px;border:1px solid #e7e3d8;border-radius:17px;background:#fbfaf6}.gift-account b{display:block;font-size:12px;color:var(--navy);margin-bottom:4px}.gift-account span{display:block;color:#536579;font-size:12px;line-height:1.55;word-break:break-word}.copy-btn{margin-top:10px;border:1px solid #c9aa48;background:#fff;border-radius:999px;padding:8px 13px;color:#7b5e12;font-size:10px;font-weight:800;cursor:pointer}.gift-note{margin:18px 4px 0;color:var(--muted);font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;line-height:1.55;text-align:left}`;
+    style.textContent=`
+      .gift-intro{max-width:560px;margin:0 auto;color:var(--muted);font-size:13px;line-height:1.8}
+      .gift-card{width:min(100%,590px);max-width:590px;margin:28px auto 0;padding:20px 22px 18px;border:1px solid rgba(212,175,55,.32);border-radius:24px;background:#fff;box-shadow:var(--shadow);text-align:left}
+      .gift-field{margin-bottom:12px}
+      .gift-field label{display:block;margin:0 2px 8px;font-size:12px;line-height:1.3}
+      .gift-field select{min-height:58px;padding:13px 15px;border-radius:18px}
+      .gift-detail{display:none;gap:10px}
+      .gift-detail.show{display:grid}
+      .gift-account{padding:16px;border:1px solid #e7e3d8;border-radius:17px;background:#fbfaf6}
+      .gift-account b{display:block;font-size:12px;color:var(--navy);margin-bottom:4px}
+      .gift-account span{display:block;color:#536579;font-size:12px;line-height:1.55;word-break:break-word}
+      .copy-btn{margin-top:10px;border:1px solid #c9aa48;background:#fff;border-radius:999px;padding:8px 13px;color:#7b5e12;font-size:10px;font-weight:800;cursor:pointer}
+      .gift-note{margin:14px 2px 0;color:var(--muted);font-family:"Cormorant Garamond",Georgia,serif;font-size:14px;line-height:1.5;text-align:left}
+      @media(max-width:420px){.gift-card{padding:18px 16px 16px;border-radius:22px}.gift-field select{min-height:56px}.gift-note{font-size:13px;line-height:1.45}}
+    `;
     document.head.appendChild(style); rsvp.closest('.section')?.before(section);
     const giftSelect=section.querySelector('#giftType'),digitalBox=section.querySelector('#digitalGift'),physicalBox=section.querySelector('#physicalGift');
     giftSelect.addEventListener('change',()=>{digitalBox.classList.toggle('show',giftSelect.value==='digital');physicalBox.classList.toggle('show',giftSelect.value==='physical')});
