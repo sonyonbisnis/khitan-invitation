@@ -14,9 +14,10 @@
 <section id="login" class="login"><div class="field"><label>Admin Token</label><input id="token" type="password" autocomplete="current-password" placeholder="Masukkan token admin"></div><button id="loginBtn">Masuk</button><div id="loginMsg" class="msg"></div></section>
 <section id="dashboard" class="hidden">
 <div class="stats"><div class="stat"><b id="hadir">0</b><span>Hadir (RSVP)</span></div><div class="stat"><b id="tidakHadir">0</b><span>Tidak Hadir</span></div><div class="stat"><b id="totalTamu">0</b><span>Total Tamu</span></div><div class="stat"><b id="totalRsvp">0</b><span>Total RSVP</span></div></div>
-<div class="panel"><div class="toolbar"><h2>Daftar Tamu</h2><button id="csvBtn" class="secondary">Download CSV</button></div><div class="table-wrap"><table class="table"><thead><tr><th>Nama</th><th>Kehadiran</th><th>Tamu</th><th>Ucapan &amp; Do'a</th><th>Tanda Kasih</th><th>Waktu</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<div class="panel"><div class="toolbar"><h2>Daftar Tamu</h2><button id="xlsxBtn" class="secondary">Download XLSX</button></div><div class="table-wrap"><table class="table"><thead><tr><th>Nama</th><th>Kehadiran</th><th>Tamu</th><th>Ucapan &amp; Do'a</th><th>Tanda Kasih</th><th>Waktu</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 </section>
 </div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script>
 let token='';let entries=[];
 const $=id=>document.getElementById(id);
@@ -24,14 +25,24 @@ $('loginBtn').onclick=async()=>{token=$('token').value.trim();if(!token){$('logi
 $('token').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
 async function load(){
   $('loginMsg').textContent='Memuat...';
-  try{const r=await fetch('/api/admin',{headers:{Authorization:`Bearer ${token}`}});const data=await r.json();if(!r.ok)throw new Error(data.error||'Akses ditolak');
+  try{const r=await fetch('/api/admin?limit=1000',{headers:{Authorization:`Bearer ${token}`}});const data=await r.json();if(!r.ok)throw new Error(data.error||'Akses ditolak');
     entries=data.entries||[];$('hadir').textContent=data.summary.hadir;$('tidakHadir').textContent=data.summary.tidak_hadir;$('totalTamu').textContent=data.summary.total_tamu;$('totalRsvp').textContent=data.summary.total_rsvp;render();$('login').classList.add('hidden');$('dashboard').classList.remove('hidden');
   }catch(e){$('loginMsg').textContent=e.message}
 }
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function render(){$('rows').innerHTML=entries.length?entries.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.attendance)}</td><td>${esc(x.guest_count)}</td><td>${esc(x.message)}</td><td>${esc(x.gift_type||'—')}</td><td>${esc(x.created_at)}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Belum ada data.</td></tr>'}
-$('csvBtn').onclick=()=>{const head=['Nama','Kehadiran','Jumlah Tamu','Ucapan & Do\'a','Tanda Kasih','Waktu'];const lines=[head,...entries.map(x=>[x.name,x.attendance,x.guest_count,x.message,x.gift_type||'',x.created_at])].map(row=>row.map(csv).join(','));const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rsvp-azfar-azraf.csv';a.click();URL.revokeObjectURL(a.href)};
-function csv(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+$('xlsxBtn').onclick=()=>{
+  if(!entries.length){alert('Belum ada data RSVP untuk diunduh.');return}
+  const rows=[
+    ['Nama','Kehadiran','Jumlah Tamu',"Ucapan & Do'a",'Tanda Kasih','Waktu'],
+    ...entries.map(x=>[x.name,x.attendance,Number(x.guest_count||0),x.message,x.gift_type||'',x.created_at])
+  ];
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:28},{wch:16},{wch:14},{wch:55},{wch:24},{wch:22}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'RSVP');
+  XLSX.writeFile(wb,'rsvp-azfar-azraf.xlsx');
+};
 </script>
 </body>
 </html>
