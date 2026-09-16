@@ -8,7 +8,7 @@
   polishStyle.textContent = `
     .section h2{letter-spacing:-.015em}
     .intro-text,.detail small,.event p,.mapbox p{font-size:13px;line-height:1.65}
-    .mapbox p .venue-name{display:block;font-size:18px;line-height:1.35;color:#fff;margin-bottom:7px;font-weight:700}
+    .mapbox p .venue-name{display:block;font-size:18px;line-height:1.35;color:#fff;margin-bottom:3px;font-weight:700}
     .hero h1{font-size:clamp(58px,15vw,88px)}
     .hero h1 small{font-size:18px;letter-spacing:.18em;margin-bottom:13px}
     .hero-name{font-size:42px;line-height:1.05}
@@ -29,7 +29,7 @@
       .rsvp{padding:19px 17px;border-radius:23px}
       .field{margin-bottom:14px}
       .intro-text,.detail small,.event p,.mapbox p{font-size:12px}
-      .mapbox p .venue-name{font-size:17px}
+      .mapbox p .venue-name{font-size:17px;margin-bottom:3px}
       .hero h1{font-size:56px}
       .hero h1 small{font-size:17px}
       .hero-name{font-size:40px}
