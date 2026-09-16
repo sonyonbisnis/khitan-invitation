@@ -97,6 +97,12 @@
     requestAnimationFrame(() => section.classList.add('show'));
   }
 
+  // Load the digital guestbook flow after the existing RSVP markup is ready.
+  const guestbookScript = document.createElement('script');
+  guestbookScript.src = 'guestbook.js';
+  guestbookScript.defer = true;
+  document.head.appendChild(guestbookScript);
+
   const guest = new URLSearchParams(window.location.search).get('to');
   if (!guest || !guest.trim()) return;
 
