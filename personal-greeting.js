@@ -42,16 +42,27 @@
   `;
   document.head.appendChild(polishStyle);
 
-  const mapP=document.querySelector('.mapbox p');
-  if(mapP && !mapP.querySelector('.venue-name')){
-    mapP.innerHTML=mapP.innerHTML.replace('Goeboek Bamboe','<strong class="venue-name">Goeboek Bamboe</strong>');
-  }
-  const mapBox=document.querySelector('.mapbox');
-  const mapSection=mapBox?.closest('.section');
-  if(mapSection){
-    mapSection.classList.add('location-tight');
-    mapSection.previousElementSibling?.classList.add('rsvp-tight');
-  }
+  const mapP = document.querySelector('.mapbox p');
+
+if (mapP) {
+  mapP.innerHTML = `
+    <strong class="venue-name">
+      RM. Goeboek Bamboe Mampang Sawangan
+    </strong>
+    <br>
+    Jl. Pramuka Raya No.12A, RT.1/RW.6,
+    Mampang, Kec. Pancoran Mas, Kota Depok,
+    Jawa Barat 16433
+  `;
+}
+
+const mapBox = document.querySelector('.mapbox');
+const mapSection = mapBox?.closest('.section');
+
+if (mapSection) {
+  mapSection.classList.add('location-tight');
+  mapSection.previousElementSibling?.classList.add('rsvp-tight');
+}
 
   const bgMusic = document.getElementById('bgMusic');
   if (bgMusic) {
